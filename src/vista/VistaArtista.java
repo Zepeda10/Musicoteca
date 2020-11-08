@@ -205,7 +205,8 @@ public class VistaArtista extends javax.swing.JFrame {
 
 
     public static void main(String args[]) {
-       
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

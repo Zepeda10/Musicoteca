@@ -214,12 +214,13 @@ public class VistaAlbum extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-         VistaArtista vartista= new VistaArtista();
+    public static void main(String args[]) {   
+        VistaArtista vartista= new VistaArtista();
         VistaAlbum valbum = new VistaAlbum();
         Controlador c = new Controlador(vartista, valbum);
         valbum.setVisible(true);
         valbum.setLocationRelativeTo(valbum);
+                
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
