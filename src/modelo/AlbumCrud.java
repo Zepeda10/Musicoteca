@@ -36,4 +36,20 @@ public class AlbumCrud {
         return datos;
     }
     
+    public int agregarAlbum(Album al){
+        String sql = " INSERT INTO album (titulo,anio,genero,id_artista) VALUES (?,?,?,?) ";     
+        try{
+            conn = conectar.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,al.getTitulo());
+            ps.setInt(2,al.getAnio());
+            ps.setString(3,al.getGenero());
+            ps.setInt(4,al.getId_artista());
+            ps.executeUpdate();
+        }catch(Exception e){
+            
+        }
+        return 1;
+    }
+    
 }

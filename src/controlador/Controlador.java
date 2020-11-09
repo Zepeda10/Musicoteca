@@ -33,6 +33,7 @@ public class Controlador implements ActionListener {
         this.visArt.btnListar.addActionListener(this);
         
         this.visArt.btnGuardarAr.addActionListener(this);
+        this.visAlbm.btnGuardarAl.addActionListener(this);
     }
 
     @Override
@@ -41,15 +42,19 @@ public class Controlador implements ActionListener {
             listarArtista(visArt.tablaArtista);
         } 
         if(ae.getSource()==visAlbm.btnListar){
-            agregarArtista();
+            listarAlbum(visAlbm.tablaAlbum);
         }
         
         if(ae.getSource()==visArt.btnGuardarAr){
             agregarArtista();
         } 
+        if(ae.getSource()==visAlbm.btnGuardarAl){
+            agregarAlbum();
+        }
     }
     
-        public void agregarArtista(){
+    //Método para agregar artista 
+    public void agregarArtista(){
         String nombre = visArt.txtNombre.getText();
         String alias = visArt.txtAlias.getText();
         a.setNombre(nombre);
@@ -60,6 +65,26 @@ public class Controlador implements ActionListener {
             JOptionPane.showMessageDialog(visArt, "Artista agregado");
         }else{
             JOptionPane.showMessageDialog(visArt, "Error");
+        }
+        
+    }
+    
+    //Método para agregar álbum
+    public void agregarAlbum(){
+        String titulo = visAlbm.txtTitulo.getText();
+        int anio =  Integer.parseInt(visAlbm.txtAnio.getText());
+        String genero = visAlbm.txtGenero.getText();
+        int id_artista =  Integer.parseInt(visAlbm.txtIdArtista.getText());
+        al.setTitulo(titulo);
+        al.setAnio(anio);
+        al.setGenero(genero);
+        al.setId_artista(id_artista);
+        int resultado = albm.agregarAlbum(al);
+        
+        if(resultado==1){
+            JOptionPane.showMessageDialog(visAlbm, "Álbum agregado");
+        }else{
+            JOptionPane.showMessageDialog(visAlbm, "Error");
         }
         
     }
