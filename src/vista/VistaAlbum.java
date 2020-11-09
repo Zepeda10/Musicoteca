@@ -31,10 +31,10 @@ public class VistaAlbum extends javax.swing.JFrame {
         txtAnio = new javax.swing.JTextField();
         txtGenero = new javax.swing.JTextField();
         txtIdArtista = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnOk = new javax.swing.JButton();
+        btnGuardarAl = new javax.swing.JButton();
+        btnEditarAl = new javax.swing.JButton();
+        btnEliminarAl = new javax.swing.JButton();
+        btnOkAl = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
 
@@ -83,18 +83,18 @@ public class VistaAlbum extends javax.swing.JFrame {
         lblIdArtista.setForeground(new java.awt.Color(0, 0, 0));
         lblIdArtista.setText("Id Artista:");
 
-        btnGuardar.setText("Guardar");
+        btnGuardarAl.setText("Guardar");
 
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarAl.setText("Editar");
+        btnEditarAl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnEditarAlActionPerformed(evt);
             }
         });
 
-        btnEliminar.setText("Eliminar");
+        btnEliminarAl.setText("Eliminar");
 
-        btnOk.setText("Ok");
+        btnOkAl.setText("Ok");
 
         btnListar.setText("Listar");
 
@@ -130,13 +130,13 @@ public class VistaAlbum extends javax.swing.JFrame {
                         .addGap(18, 18, 18))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnGuardar)
+                        .addComponent(btnGuardarAl)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEditar)
+                        .addComponent(btnEditarAl)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar)
+                        .addComponent(btnEliminarAl)
                         .addGap(18, 18, 18)
-                        .addComponent(btnOk)
+                        .addComponent(btnOkAl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnListar)
@@ -167,10 +167,10 @@ public class VistaAlbum extends javax.swing.JFrame {
                     .addComponent(lblGenero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnOk)
+                    .addComponent(btnGuardarAl)
+                    .addComponent(btnEditarAl)
+                    .addComponent(btnEliminarAl)
+                    .addComponent(btnOkAl)
                     .addComponent(btnListar)))
         );
 
@@ -201,9 +201,9 @@ public class VistaAlbum extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    private void btnEditarAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAlActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarActionPerformed
+    }//GEN-LAST:event_btnEditarAlActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         VistaMenu abrir=new VistaMenu();//Se manda a abir la ventana del menu principal
@@ -224,11 +224,11 @@ public class VistaAlbum extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnEditar;
-    public javax.swing.JButton btnEliminar;
-    public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnEditarAl;
+    public javax.swing.JButton btnEliminarAl;
+    public javax.swing.JButton btnGuardarAl;
     public javax.swing.JButton btnListar;
-    public javax.swing.JButton btnOk;
+    public javax.swing.JButton btnOkAl;
     public javax.swing.JButton btnRegresar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -8,6 +8,7 @@ import modelo.Artista;
 import modelo.ArtistaCrud;
 import vista.VistaArtista;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.Album;
 import modelo.AlbumCrud;
 import vista.VistaAlbum;
@@ -30,6 +31,8 @@ public class Controlador implements ActionListener {
         this.visAlbm = valb;
         this.visAlbm.btnListar.addActionListener(this);
         this.visArt.btnListar.addActionListener(this);
+        
+        this.visArt.btnGuardarAr.addActionListener(this);
     }
 
     @Override
@@ -38,9 +41,29 @@ public class Controlador implements ActionListener {
             listarArtista(visArt.tablaArtista);
         } 
         if(ae.getSource()==visAlbm.btnListar){
-            listarAlbum(visAlbm.tablaAlbum);
+            agregarArtista();
+        }
+        
+        if(ae.getSource()==visArt.btnGuardarAr){
+            agregarArtista();
         } 
     }
+    
+        public void agregarArtista(){
+        String nombre = visArt.txtNombre.getText();
+        String alias = visArt.txtAlias.getText();
+        a.setNombre(nombre);
+        a.setAlias(alias);
+        int resultado = art.agregarArtista(a);
+        
+        if(resultado==1){
+            JOptionPane.showMessageDialog(visArt, "Artista agregado");
+        }else{
+            JOptionPane.showMessageDialog(visArt, "Error");
+        }
+        
+    }
+    
     
     //Método para mostrar tabla Artista al ejecutar
     public void listarArtista(JTable tabla){
@@ -52,12 +75,13 @@ public class Controlador implements ActionListener {
             objeto[0] = listaArtista.get(i).getId();
             objeto[1] = listaArtista.get(i).getNombre();
             objeto[2] = listaArtista.get(i).getAlias();
-            
+
             tablaArt.addRow(objeto);
         }
         visArt.tablaArtista.setModel(tablaArt);
     }
     
+
      //Método para mostrar tabla Album al ejecutar
     public void listarAlbum(JTable tabla){
         tablaAlbm = (DefaultTableModel)tabla.getModel();

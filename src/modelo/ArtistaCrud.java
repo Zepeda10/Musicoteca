@@ -34,4 +34,18 @@ public class ArtistaCrud {
         }
         return datos;
     }
+    
+    public int agregarArtista(Artista ar){
+        String sql = " INSERT INTO artista (nombre,alias) VALUES (?,?) ";     
+        try{
+            conn = conectar.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,ar.getNombre());
+            ps.setString(2,ar.getAlias());
+            ps.executeUpdate();
+        }catch(Exception e){
+            
+        }
+        return 1;
+    }
 }
