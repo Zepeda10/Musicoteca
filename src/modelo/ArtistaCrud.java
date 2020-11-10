@@ -44,8 +44,43 @@ public class ArtistaCrud {
             ps.setString(2,ar.getAlias());
             ps.executeUpdate();
         }catch(Exception e){
-            
+             System.out.println(e.getMessage());
         }
         return 1;
+    }
+    
+    public int actualizaArtista(Artista ar){
+        int resultado =0;
+        String sql = "UPDATE artista SET nombre=?, alias=? WHERE id_artista=?";
+        
+        try{
+            conn = conectar.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,ar.getNombre());
+            ps.setString(2,ar.getAlias());
+            ps.setInt(3,ar.getId());
+            resultado = ps.executeUpdate(); 
+            
+            if(resultado==1){
+                return 1;
+            }else{
+                return 0;
+            }
+                     
+        }catch(Exception e){
+             System.out.println(e.getMessage());
+        }
+        return resultado;
+    }
+    
+    public void eliminarArtista(int id){
+        String sql = "DELETE FROM artista WHERE id_artista ="+id;
+        try{
+            conn = conectar.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }

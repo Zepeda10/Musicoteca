@@ -13,8 +13,7 @@ public class Conexion {
         String pass = "";
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            conn = (Connection) DriverManager.getConnection(url,user,pass);
-            System.out.println("CONEXIÓN A LA BASE DE DATOS: EXITOSA");
+            conn = (Connection) DriverManager.getConnection(url,user,pass); 
         }catch(Exception e){
            System.out.print(e.getMessage());
         }
