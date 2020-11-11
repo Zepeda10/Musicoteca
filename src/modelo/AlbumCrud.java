@@ -52,4 +52,41 @@ public class AlbumCrud {
         return 1;
     }
     
+    public int actualizaAlbum(Album al){
+        int resultado =0;
+        String sql = "UPDATE album SET titulo=?, anio=?, genero=?, id_artista=? WHERE id_album=?";
+        
+        try{
+            conn = conectar.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,al.getTitulo());
+            ps.setInt(2,al.getAnio());
+            ps.setString(3,al.getGenero());
+            ps.setInt(4,al.getId_artista());
+            ps.setInt(5,al.getId());
+            resultado = ps.executeUpdate(); 
+            
+            if(resultado==1){
+                return 1;
+            }else{
+                return 0;
+            }
+                     
+        }catch(Exception e){
+             System.out.println(e.getMessage());
+        }
+        return resultado;
+    }
+    
+    public void eliminarAlbum(int id){
+        String sql = "DELETE FROM album WHERE id_album ="+id;
+        try{
+            conn = conectar.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
 }

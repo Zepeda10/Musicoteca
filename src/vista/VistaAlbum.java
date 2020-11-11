@@ -83,6 +83,8 @@ public class VistaAlbum extends javax.swing.JFrame {
         lblIdArtista.setForeground(new java.awt.Color(0, 0, 0));
         lblIdArtista.setText("Id Artista:");
 
+        txtId.setEditable(false);
+
         btnGuardarAl.setText("Guardar");
 
         btnEditarAl.setText("Editar");

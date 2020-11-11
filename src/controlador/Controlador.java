@@ -37,10 +37,14 @@ public class Controlador implements ActionListener {
         
         this.visArt.btnEditarAr.addActionListener(this);
         this.visArt.btnOkAr.addActionListener(this);
+        this.visAlbm.btnEditarAl.addActionListener(this);
+        this.visAlbm.btnOkAl.addActionListener(this);
         
         this.visArt.btnEliminarAr.addActionListener(this);
-        
+        this.visAlbm.btnEliminarAl.addActionListener(this);
+          
         listarArtista(visArt.tablaArtista);
+        listarAlbum(visAlbm.tablaAlbum);
     }
 
     @Override
@@ -50,6 +54,7 @@ public class Controlador implements ActionListener {
             listarArtista(visArt.tablaArtista);
         } 
         if(ae.getSource()==visAlbm.btnListar){
+            limpiarTablaAlbm();
             listarAlbum(visAlbm.tablaAlbum);
         }
         
@@ -60,6 +65,8 @@ public class Controlador implements ActionListener {
         } 
         if(ae.getSource()==visAlbm.btnGuardarAl){
             agregarAlbum();
+            limpiarTablaAlbm();
+            listarAlbum(visAlbm.tablaAlbum);
         }
         if(ae.getSource()==visArt.btnEditarAr){
             int fila = visArt.tablaArtista.getSelectedRow();
@@ -86,6 +93,36 @@ public class Controlador implements ActionListener {
             limpiarTablaArt();
             listarArtista(visArt.tablaArtista);
         } 
+        
+        if(ae.getSource()==visAlbm.btnEditarAl){
+            int fila = visAlbm.tablaAlbum.getSelectedRow();
+            if(fila==-1){
+                JOptionPane.showMessageDialog(visAlbm,"Debe seleccionar un registro");
+            }else{
+                int id_album = Integer.parseInt((String) visAlbm.tablaAlbum.getValueAt(fila, 0).toString());
+                String titulo =  (String) visAlbm.tablaAlbum.getValueAt(fila,1);
+                int anio = Integer.parseInt((String) visAlbm.tablaAlbum.getValueAt(fila, 2).toString());
+                String genero =  (String) visAlbm.tablaAlbum.getValueAt(fila,3);
+                int id_artista = Integer.parseInt((String) visAlbm.tablaAlbum.getValueAt(fila, 4).toString());
+                visAlbm.txtId.setText(""+id_album);
+                visAlbm.txtTitulo.setText(titulo);
+                visAlbm.txtAnio.setText(""+anio);
+                visAlbm.txtGenero.setText(genero);
+                visAlbm.txtIdArtista.setText(""+id_artista);
+            }
+        }
+        
+        if(ae.getSource()==visAlbm.btnOkAl){
+            actualizarAlbum();
+            limpiarTablaAlbm();
+            listarAlbum(visAlbm.tablaAlbum);
+        }
+        
+        if(ae.getSource()==visAlbm.btnEliminarAl){
+            eliminarAlbum();
+            limpiarTablaAlbm();
+            listarAlbum(visAlbm.tablaAlbum);
+        } 
     }
     
     //eliminar artista
@@ -100,6 +137,18 @@ public class Controlador implements ActionListener {
             }
     }
     
+    //eliminar álbum
+    public void eliminarAlbum(){
+        int fila = visAlbm.tablaAlbum.getSelectedRow(); 
+            if(fila==-1){
+                JOptionPane.showMessageDialog(visAlbm,"Debe seleccionar un registro");
+            }else{
+                int id_album = Integer.parseInt((String) visAlbm.tablaAlbum.getValueAt(fila, 0).toString());
+                albm.eliminarAlbum(id_album);
+                 JOptionPane.showMessageDialog(visAlbm,"Álbum eliminado");
+            }
+    }
+    
     //limpiar tabla artista
     public void limpiarTablaArt(){
         for (int i = 0; i < visArt.tablaArtista.getRowCount(); i++) {
@@ -107,11 +156,19 @@ public class Controlador implements ActionListener {
             i=i-1;
         }
     }
+    
+    //limpiar tabla álbum
+    public void limpiarTablaAlbm(){
+        for (int i = 0; i < visAlbm.tablaAlbum.getRowCount(); i++) {
+            tablaAlbm.removeRow(i);
+            i=i-1;
+        }
+    }
      
     //Método para actualizar artista
     public void actualizarArtista(){
         if (visArt.txtId.getText().equals("")) {
-            JOptionPane.showMessageDialog(visArt, "No se Identifica el Id, debe selecionar la opción Editar");
+            JOptionPane.showMessageDialog(visArt, "No se identifica el Id, debe selecionar la opción Editar");
         }else{
             int id = Integer.parseInt(visArt.txtId.getText());
             String nombre = visArt.txtNombre.getText();
@@ -127,6 +184,35 @@ public class Controlador implements ActionListener {
                  JOptionPane.showMessageDialog(visArt, "Artista actualizado correctamente");
             }else{
                  JOptionPane.showMessageDialog(visArt, "Error");
+            }
+        }
+    }
+    
+    //Método para actualizar álbum
+    public void actualizarAlbum(){
+        if (visAlbm.txtId.getText().equals("")) {
+            JOptionPane.showMessageDialog(visAlbm, "No se identifica el Id, debe selecionar la opción Editar");
+        }else{
+            
+            
+            int id = Integer.parseInt(visAlbm.txtId.getText());
+            String titulo = visAlbm.txtTitulo.getText();
+            int anio = Integer.parseInt(visAlbm.txtAnio.getText());
+            String genero = visAlbm.txtGenero.getText();
+            int idArtista = Integer.parseInt(visAlbm.txtIdArtista.getText());
+
+            al.setId(id);
+            al.setTitulo(titulo);
+            al.setAnio(anio);
+            al.setGenero(genero);
+            al.setId_artista(idArtista);
+
+            int resultado = albm.actualizaAlbum(al);
+
+            if(resultado==1){
+                 JOptionPane.showMessageDialog(visAlbm, "Álbum actualizado correctamente");
+            }else{
+                 JOptionPane.showMessageDialog(visAlbm, "Error");
             }
         }
     }
