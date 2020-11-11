@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import modelo.Album;
 import modelo.AlbumCrud;
 import vista.VistaAlbum;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
 public class Controlador implements ActionListener {
     //artista
@@ -25,6 +27,8 @@ public class Controlador implements ActionListener {
     Album al = new Album();
     VistaAlbum visAlbm = new VistaAlbum();
     DefaultTableModel tablaAlbm = new DefaultTableModel();
+    
+    TableRowSorter rowSorter;//Del filtro de búsqueda
     
     public Controlador(VistaArtista va, VistaAlbum valb){
         this.visArt = va;
@@ -42,6 +46,8 @@ public class Controlador implements ActionListener {
         
         this.visArt.btnEliminarAr.addActionListener(this);
         this.visAlbm.btnEliminarAl.addActionListener(this);
+        
+        this.visAlbm.btnBuscar.addActionListener(this);
           
         listarArtista(visArt.tablaArtista);
         listarAlbum(visAlbm.tablaAlbum);
@@ -123,7 +129,16 @@ public class Controlador implements ActionListener {
             limpiarTablaAlbm();
             listarAlbum(visAlbm.tablaAlbum);
         } 
+        
+         if(ae.getSource()==visAlbm.btnBuscar){
+             limpiarTablaAlbm();
+            listarAlbum(visAlbm.tablaAlbum);
+        } 
+ 
     }
+    
+
+    
     
     //eliminar artista
     public void eliminarArtista(){
@@ -248,7 +263,7 @@ public class Controlador implements ActionListener {
         if(resultado==1){
             JOptionPane.showMessageDialog(visAlbm, "Álbum agregado");
         }else{
-            JOptionPane.showMessageDialog(visAlbm, "Error");
+            JOptionPane.showMessageDialog(visAlbm, "Error, verifique si existe un artista con ese ID");
         }
         
     }
@@ -274,7 +289,8 @@ public class Controlador implements ActionListener {
      //Método para mostrar tabla Album al ejecutar
     public void listarAlbum(JTable tabla){
         tablaAlbm = (DefaultTableModel)tabla.getModel();
-        List<Album>listaAlbum = albm.listar();
+        String titulo = visAlbm.txtBuscar.getText();
+        List<Album>listaAlbum = albm.listar(titulo);
         Object[]objeto2 = new Object[5];
         
         for (int i = 0; i < listaAlbum.size(); i++) {
@@ -285,9 +301,17 @@ public class Controlador implements ActionListener {
             objeto2[4] = listaAlbum.get(i).getId_artista();
             
             tablaAlbm.addRow(objeto2);
-        }
+        }      
         visAlbm.tablaAlbum.setModel(tablaAlbm);
+        
+        rowSorter = new TableRowSorter(tablaAlbm);//Del filtro de búsqueda
+          visAlbm.tablaAlbum.setRowSorter(rowSorter);//Del filtro de Búsqueda
     }
+    
+   public void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {                        
+        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)"+visAlbm.txtBuscar.getText(),0,1,2));
+       
+    } 
     
     
 }

@@ -12,9 +12,15 @@ public class AlbumCrud {
     PreparedStatement ps;
     ResultSet rs;
     
-    public List listar(){
-        List<Album>datos = new ArrayList<>();
-        String sql = "SELECT * FROM album";
+    public List listar(String atributo){
+        List<Album>datos = new ArrayList<>();  
+        String sql;
+        
+        if(atributo.equals("")){
+            sql = "SELECT * FROM album";
+        }else{
+            sql = "SELECT * FROM album WHERE titulo='"+atributo+"'";
+        }
         try{
             conn = conectar.getConnection();
             ps = conn.prepareStatement(sql);
@@ -29,13 +35,13 @@ public class AlbumCrud {
                 a.setId_artista(rs.getInt(5));
                 datos.add(a);
             }
-            
+    
         }catch(Exception e){
             
         }
         return datos;
     }
-    
+       
     public int agregarAlbum(Album al){
         String sql = " INSERT INTO album (titulo,anio,genero,id_artista) VALUES (?,?,?,?) ";     
         try{
@@ -87,6 +93,6 @@ public class AlbumCrud {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-    }
+    }  
     
 }
